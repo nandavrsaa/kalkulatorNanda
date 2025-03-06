@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        table {
+            width: 250px;
+            height: 300px;
+            background: white;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgb(210, 5, 104);
+            border-spacing: 5px;
+            border-collapse: separate;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        td {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 18px;
+            border: 2px solid rgb(223, 15, 143);
+            cursor: pointer;
+            background-color: #fff7f8;
+            padding: 5px;
+            border-radius: 10px;
+        }
+        th {
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            border-bottom: 2px solid rgb(200, 3, 105);
+            background: rgb(255, 120, 183);
+            color: white;
+            font-size: 1.5em;
+            padding: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        td:hover {
+            background-color: rgb(255, 60, 164);
+        }
+        .operator {
+            background-color: rgb(255, 139, 176);
+            color: rgb(122, 0, 63);
+            font-weight: bold;
+        }
+        #display {
+            width: 100%;
+            height: 50px;
+            font-size: 1.5em;
+            text-align: right;
+            border: none;
+            outline: none;
+            padding: 10px;
+            background: rgb(197, 0, 85);
+            color: rgb(255, 211, 232);
+            box-sizing: border-box;
+            overflow: hidden;
+            white-space: nowrap;
+            display: block;
+            max-width: 240px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan="4"><input type="text" id="display" disabled></th>
+        </tr>
+        <tr>
+            <td class="operator" onclick="pressKey('+')">+</td>
+            <td class="operator" onclick="pressKey('-')">-</td>
+            <td class="operator" onclick="pressKey('x')">×</td>
+            <td class="operator" onclick="pressKey('/')">÷</td>
+        </tr>
+        <tr>
+            <td onclick="pressKey('7')">7</td>
+            <td onclick="pressKey('8')">8</td>
+            <td onclick="pressKey('9')">9</td>
+            <td rowspan="4" style="background-color: #ffc8d9; border-radius: 10px;" onclick="calculate()">=</td>
+        </tr>
+        <tr>
+            <td onclick="pressKey('4')">4</td>
+            <td onclick="pressKey('5')">5</td>
+            <td onclick="pressKey('6')">6</td>
+        </tr>
+        <tr>
+            <td onclick="pressKey('1')">1</td>
+            <td onclick="pressKey('2')">2</td>
+            <td onclick="pressKey('3')">3</td>
+        </tr>
+        <tr>
+            <td onclick="pressKey('.')">.</td>
+            <td onclick="pressKey('0')">0</td>
+            <td class="operator" onclick="clearDisplay()">C</td>
+        </tr>
+    </table>
+    <script>
+        let display = document.getElementById("display");
+        function pressKey(key) {
+            if (display.value.length < 10) { // Batas maksimal karakter
+                if (display.value === "0" && key !== ".") {
+                    display.value = key;
+                } else {
+                    display.value += key;
+                }
+            }
+        }
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = "Error";
+            }
+        }
+        function clearDisplay() {
+            display.value = "";
+        }
+    </script>
+</body>
+</html>
